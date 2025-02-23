@@ -8,6 +8,47 @@ from pymongo import MongoClient
 from dotenv import load_dotenv
 from bson.objectid import ObjectId
 from pymongo.errors import PyMongoError
+from canvas_api.get_modules import get_modules_and_video_links
+from canvas_api.download_files import save_video_metadata, get_file_download_url, download_video
+
+def process_and_download_videos(base_url, access_token, course_id):
+    """
+    Processes modules to extract download URLs for videos, saves video metadata,
+    and downloads each video as an .mp4 file.
+    """
+    modules_with_videos = get_modules_and_video_links(base_url, access_token, course_id)
+    downloaded_paths = {}
+    if modules_with_videos:
+        print("Processing modules, extracting download URLs and downloading videos...")
+        for module_name, video_links in modules_with_videos.items():
+            print(f"\nModule: {module_name}")
+            for link in video_links:
+                # Get the actual download URL and display name from the API endpoint
+                module_video_paths = []
+                download_url, display_name = get_file_download_url(link, access_token)
+                if download_url and display_name:
+                    # Ensure the filename ends with .mp4
+                    if not display_name.lower().endswith(".mp4"):
+                        display_name += ".mp4"
+                    
+                    # Save video metadata for later use
+                    file_metadata = {
+                        "filename": display_name,
+                        "url": download_url,
+                    }
+                    save_video_metadata(file_metadata)
+                    
+                    # Download the video using the extracted download URL
+                    video_path = download_video(download_url, display_name, access_token)
+                    if video_path:
+                        module_video_paths.append(video_path)
+                else:
+                    print(f"Could not extract download URL from {link}")
+            downloaded_paths[module_name] = module_video_paths
+        print("\nMetadata saved. Videos downloaded.")
+    else:
+        print("No video links found in the specified course.")
+    return downloaded_paths
 
 
 def transcribe_mp4(video_path, chunk_duration_minutes=5):
@@ -23,12 +64,14 @@ def transcribe_mp4(video_path, chunk_duration_minutes=5):
     # -------------------------------------------------------------------
     # 1) EXTRACT AUDIO FROM VIDEO AND SAVE AS .MP3
     # -------------------------------------------------------------------
+    audio_dir = os.path.join("..", "data", "audio")
+    os.makedirs(audio_dir, exist_ok=True)
     try:
         # Load the video
         video = VideoFileClip(video_path)
         # Derive an MP3 filename from the MP4 path (same folder, same basename)
         base_name = os.path.splitext(os.path.basename(video_path))[0]
-        audio_file = f"{base_name}.mp3"
+        audio_file = os.path.join(audio_dir, f"{base_name}.mp3")
         video.audio.write_audiofile(audio_file)
         print(f"Audio extracted and saved as {audio_file}")
     except Exception as e:
@@ -48,7 +91,7 @@ def transcribe_mp4(video_path, chunk_duration_minutes=5):
         num_chunks = math.ceil(total_length_ms / chunk_length_ms)
 
         # Create a folder to store chunks, e.g. "myvideo_chunks"
-        chunk_folder = f"{base_name}_chunks"
+        chunk_folder = os.path.join(audio_dir, f"{base_name}_chunks")
         os.makedirs(chunk_folder, exist_ok=True)
 
         # Export each chunk as .mp3
@@ -175,25 +218,3 @@ class TranscriptDB:
         Closes the MongoDB connection.
         """
         self.client.close()
-
-
-if __name__ == "__main__":
-    # Example usage
-    # video_path = "test/podcast.MP4"
-    # transcription_text = transcribe_mp4(video_path)
-    # print("\nFINAL TRANSCRIPTION:\n", transcription_text[:100])
-
-    conn_str = os.getenv("connection_string")
-    if not conn_str:
-        raise ValueError("connection_string not found in environment variables.")
-
-    db_instance = TranscriptDB(conn_str)
-    # Insert a transcript (example values)
-    doc_id = db_instance.insert_transcript(
-        "This is a sample transcript.", "podcast.MP4", "Course_test"
-    )
-    # Retrieve the inserted document
-    if doc_id:
-        document = db_instance.get_transcript_by_id(doc_id)
-        print("Retrieved document:", document)
-    db_instance.close()
