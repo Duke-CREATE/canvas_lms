@@ -8,7 +8,10 @@ def get_modules_and_video_links(base_url, access_token, course_id):
     
     # Step 1: Fetch all modules in the course
     modules_url = f"{base_url}/courses/{course_id}/modules"
+    print(modules_url, headers)
     modules_response = requests.get(modules_url, headers=headers)
+    if not modules_response.ok:
+        print(modules_response.text)
 
     if modules_response.status_code != 200:
         print(f"Failed to fetch modules: {modules_response.status_code}")
