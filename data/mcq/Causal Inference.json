@@ -1,0 +1,94 @@
+{
+    "mcqs": [
+        {
+            "q": "What is the primary purpose of a randomized controlled test (RCT)?",
+            "options": [
+                "To collect qualitative data from participants",
+                "To observe trends in historical data",
+                "To determine causal relationships by comparing treatment and control groups",
+                "To generate public opinion surveys"
+            ]
+        },
+        {
+            "q": "What are confounders in the context of causal inference?",
+            "options": [
+                "Variables that can have an effect on the outcome but are not accounted for",
+                "Data points that are consistently accurate",
+                "Participants who refuse to follow the treatment protocol",
+                "External factors affecting the test environment"
+            ]
+        },
+        {
+            "q": "What challenge arises when the treatment group does not represent the overall population?",
+            "options": [
+                "Confounding variable",
+                "Selection bias",
+                "Counterfactuals",
+                "Statistical insignificance"
+            ]
+        },
+        {
+            "q": "In causal inference, why are counterfactuals important?",
+            "options": [
+                "They provide a way to eliminate bias",
+                "They help to measure how different factors interact",
+                "They allow for an apples-to-apples comparison of outcomes",
+                "They simplify the data collection process"
+            ]
+        },
+        {
+            "q": "What does the Stable Unit Treatment Value Assumption (SUTVA) assert?",
+            "options": [
+                "The treatment has no effect on individuals receiving a placebo",
+                "Sample units do not influence each other’s treatment outcomes",
+                "The control group should have more variability than the treatment group",
+                "All treatments must be applied at the same time"
+            ]
+        },
+        {
+            "q": "Which technique can be used to calculate counterfactual outcomes in observational data?",
+            "options": [
+                "Descriptive statistics",
+                "Machine learning",
+                "Subjective analysis",
+                "Meta-analysis"
+            ]
+        },
+        {
+            "q": "What did the example in the transcript demonstrate about the average treatment effect (ATE) of the elixir?",
+            "options": [
+                "It is constant across all age groups",
+                "It can be overestimated if confounders are not controlled for",
+                "It can only be measured through randomized controlled tests",
+                "It shows that younger people benefit more from the treatment"
+            ]
+        },
+        {
+            "q": "How does the conditional average treatment effect (CATE) differ from the overall average treatment effect (ATE)?",
+            "options": [
+                "CATE looks only at the overall population, while ATE focuses on individuals",
+                "CATE analyzes the effect of treatments on specific subgroups, while ATE does not",
+                "ATE considers the prior data, while CATE is found through experiments",
+                "CATE accounts for external variables, while ATE does not"
+            ]
+        },
+        {
+            "q": "What assumption suggests that there are no unmeasured confounders that affect both treatment and outcome?",
+            "options": [
+                "Causal Markov condition",
+                "SUTVA",
+                "Ignorability",
+                "Assumption of randomization"
+            ]
+        },
+        {
+            "q": "What is treatment heterogeneity as discussed in the transcript?",
+            "options": [
+                "The variation in treatment effectiveness across different groups",
+                "An equal treatment effect across all participants",
+                "The failure of the treatment to impact any group",
+                "The ability to measure treatment effects through qualitative data"
+            ]
+        }
+    ]
+}
