@@ -3,8 +3,9 @@ from canvas_api.get_modules import get_modules_and_video_links
 from canvas_api.download_files import save_video_metadata, download_video, get_file_download_url
 from dotenv import load_dotenv
 from utils import *
+from QA.generate_questions import *
 
-load_dotenv()
+load_dotenv(".env")
 
 # Canvas LMS configuration
 BASE_URL = os.getenv("CANVAS_BASE_URL") 
@@ -37,6 +38,7 @@ def main():
                 document = db_instance.get_transcript_by_id(doc_id)
                 print("Retrieved document:", document)
             
+            generate_questions(document, module)
             # Close the database connection after each operation.
             db_instance.close()
 

@@ -1,0 +1,76 @@
+{
+    "mcqs": [
+        {
+            "q": "What is the main focus of the Interpretable RAG project discussed in the transcript?",
+            "options": [
+                "Improving black-box models",
+                "Enhancing interpretability in the RAG pipeline",
+                "Creating new AI models",
+                "Reducing the use of embeddings"
+            ]
+        },
+        {
+            "q": "What percentage of users reportedly lack trust in black-box AI models according to the study mentioned?",
+            "options": [
+                "50%",
+                "65%",
+                "75%",
+                "85%"
+            ]
+        },
+        {
+            "q": "Which specific problem related to the RAG pipeline is NOT mentioned in the solution?",
+            "options": [
+                "Interpretability",
+                "Chunking techniques",
+                "Model training",
+                "Fine-tuning the system"
+            ]
+        },
+        {
+            "q": "What technology is used to retrieve and evaluate chunks in the application's pipeline?",
+            "options": [
+                "TensorFlow",
+                "ChromaDB",
+                "OpenAI",
+                "Hugging Face"
+            ]
+        },
+        {
+            "q": "What is the purpose of the chunking technique mentioned in the project?",
+            "options": [
+                "To summarize responses",
+                "To break down text into manageable pieces",
+                "To create a visual representation",
+                "To generate embeddings"
+            ]
+        },
+        {
+            "q": "How can users interact with the RAG system as described in the transcript?",
+            "options": [
+                "By selecting embeddings and chunking techniques",
+                "By coding their own models",
+                "By inputting raw data only",
+                "By submitting queries manually"
+            ]
+        },
+        {
+            "q": "In the example provided, which color represents the query in the visual response?",
+            "options": [
+                "Yellow",
+                "Blue",
+                "Red",
+                "Green"
+            ]
+        },
+        {
+            "q": "What issue represents the secondary focus of the project, aside from interpretability?",
+            "options": [
+                "Reducing the number of embeddings used",
+                "Improving the speed of response generation",
+                "Fine-tuning the RAG system",
+                "Increasing the size of data inputs"
+            ]
+        }
+    ]
+}
